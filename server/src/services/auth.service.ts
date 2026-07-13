@@ -3,6 +3,7 @@ import { hashPassword, comparePassword } from "../utils/hashPassword";
 import generateToken from "../utils/generateToken";
 
 interface RegisterData {
+    username: string;
   name: string;
   email: string;
   password: string;
@@ -14,20 +15,34 @@ interface LoginData {
 }
 
 export const registerUser = async ({
+  username,
   name,
   email,
   password,
 }: RegisterData) => {
 
-  const existingUser = await User.findOne({ email });
+const existingEmail=
+await User.findOne({
+email
+});
 
-  if (existingUser) {
-    throw new Error("Email already exists");
-  }
+if(existingEmail){
+throw new Error("Email already exists");
+}
+
+const existingUsername=
+await User.findOne({
+username
+});
+
+if(existingUsername){
+throw new Error("Username already exists");
+}
 
   const hashedPassword = await hashPassword(password);
 
   const user = await User.create({
+  username,
   name,
   email,
   password: hashedPassword,

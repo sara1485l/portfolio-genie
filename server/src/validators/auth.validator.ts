@@ -1,6 +1,13 @@
 import { body } from "express-validator";
 
 export const registerValidation = [
+    body("username")
+.notEmpty()
+.isLength({min:3,max:20})
+.matches(/^[a-zA-Z0-9_]+$/)
+.withMessage(
+"Username can contain only letters numbers and underscore."
+),
   body("name")
     .trim()
     .notEmpty()
