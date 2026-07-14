@@ -36,11 +36,26 @@ const AboutForm = ({
   };
 
   return (
-    <div className="card border-0 shadow rounded-4">
-      <div className="card-body p-4">
-        <h3 className="fw-bold mb-4">
-          About Portfolio
+    <div className="card border-0 shadow-sm rounded-4">
+      <div className="card-body p-4 p-md-5">
+
+        <div className="d-flex align-items-center gap-2 mb-1">
+          <i className="bi bi-person-circle text-primary"></i>
+          <span
+            className="text-primary text-uppercase fw-semibold small"
+            style={{ letterSpacing: "0.05em" }}
+          >
+            Step 1
+          </span>
+        </div>
+
+        <h3 className="fw-bold mb-1" style={{ letterSpacing: "-0.01em" }}>
+          About your portfolio
         </h3>
+
+        <p className="text-muted mb-4">
+          This is the first thing visitors will see. Make it count.
+        </p>
 
         <div className="mb-4">
           <label className="form-label fw-semibold">
@@ -49,7 +64,7 @@ const AboutForm = ({
 
           <input
             type="text"
-            className="form-control form-control-lg"
+            className="form-control form-control-lg rounded-3"
             placeholder="Frontend Developer"
             value={portfolio.title}
             onChange={(e) =>
@@ -59,6 +74,10 @@ const AboutForm = ({
               })
             }
           />
+
+          <small className="text-muted">
+            A short professional title shown at the top of your profile.
+          </small>
         </div>
 
         <div className="mb-4">
@@ -68,7 +87,7 @@ const AboutForm = ({
 
           <textarea
             rows={8}
-            className="form-control"
+            className="form-control rounded-3"
             placeholder="Write something about yourself..."
             value={portfolio.about}
             onChange={(e) =>
@@ -78,11 +97,20 @@ const AboutForm = ({
               })
             }
           />
+
+          <small className="text-muted">
+            Share your background, what you do, and what makes you unique.
+          </small>
         </div>
 
         <div className="text-end">
           <button
-            className="btn btn-primary px-4"
+            className="btn btn-lg px-4 rounded-3 fw-semibold text-white shadow-sm"
+            style={{
+              background:
+                "linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%)",
+              border: "none",
+            }}
             onClick={handleGenerate}
             disabled={loading}
           >
@@ -92,10 +120,14 @@ const AboutForm = ({
                 Generating...
               </>
             ) : (
-              <>✨ Generate with AI</>
+              <>
+                <i className="bi bi-stars me-2"></i>
+                Generate with AI
+              </>
             )}
           </button>
         </div>
+
       </div>
     </div>
   );

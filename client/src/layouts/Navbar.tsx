@@ -14,7 +14,7 @@ const Navbar = () => {
           className="navbar-brand fw-bold"
           to="/dashboard"
         >
-          PortfolioGenie
+          FolioAI
         </Link>
 
         <button

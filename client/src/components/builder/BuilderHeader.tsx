@@ -12,23 +12,43 @@ const BuilderHeader = ({
   onPreview,
 }: Props) => {
   return (
-    <div className="card shadow-sm border-0 mb-4">
-      <div className="card-body d-flex justify-content-between align-items-center">
+    <div
+      className="card border-0 shadow-sm rounded-4 mb-1"
+      style={{
+        background:
+          "linear-gradient(135deg, #ffffff 0%, #fbfbff 100%)",
+      }}
+    >
+      <div className="card-body p-3 p-md-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
 
-        <div>
-          <h3 className="fw-bold mb-0">
-            Portfolio Builder
-          </h3>
+        <div className="d-flex align-items-center gap-3">
+          <div
+            className="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0 d-none d-sm-flex"
+            style={{
+              width: "44px",
+              height: "44px",
+              background:
+                "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+            }}
+          >
+            <i className="bi bi-magic text-white" style={{ fontSize: "1.15rem" }} />
+          </div>
 
-          <small className="text-muted">
-            Build your professional portfolio
-          </small>
+          <div>
+            <h4 className="fw-bold mb-0" style={{ letterSpacing: "-0.01em" }}>
+              Portfolio Builder
+            </h4>
+
+            <small className="text-muted">
+              Build your professional portfolio
+            </small>
+          </div>
         </div>
 
-        <div>
+        <div className="d-flex gap-2">
 
           <button
-            className="btn btn-outline-primary me-2"
+            className="btn btn-outline-secondary rounded-3 px-3 fw-medium"
             onClick={onPreview}
           >
             <i className="bi bi-eye me-2"></i>
@@ -36,7 +56,7 @@ const BuilderHeader = ({
           </button>
 
           <button
-            className="btn btn-primary"
+            className="btn btn-primary rounded-3 px-4 fw-medium shadow-sm"
             disabled={saving}
             onClick={onSave}
           >
@@ -52,7 +72,6 @@ const BuilderHeader = ({
             ) : (
               <>
                 <i className="bi bi-floppy me-2"></i>
-
                 Save Portfolio
               </>
             )}
