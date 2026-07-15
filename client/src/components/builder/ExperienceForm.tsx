@@ -8,46 +8,48 @@ interface Props {
   >;
 }
 
-const EducationForm = ({
+const ExperienceForm = ({
   portfolio,
   setPortfolio,
 }: Props) => {
-  const [education, setEducation] = useState({
-    university: "",
-    degree: "",
-    graduationYear: new Date().getFullYear(),
+  const [experience, setExperience] = useState({
+    company: "",
+    role: "",
+    duration: "",
+    description: "",
   });
 
-  const addEducation = () => {
+  const addExperience = () => {
     if (
-      !education.university.trim() ||
-      !education.degree.trim()
-    )
+      !experience.company.trim() ||
+      !experience.role.trim()
+    ) {
       return;
+    }
 
     setPortfolio({
       ...portfolio,
-      education: [
-        ...portfolio.education,
-        education,
+      experience: [
+        ...portfolio.experience,
+        experience,
       ],
     });
 
-    setEducation({
-      university: "",
-      degree: "",
-      graduationYear:
-        new Date().getFullYear(),
+    setExperience({
+      company: "",
+      role: "",
+      duration: "",
+      description: "",
     });
   };
 
-  const removeEducation = (
+  const removeExperience = (
     index: number
   ) => {
     setPortfolio({
       ...portfolio,
-      education:
-        portfolio.education.filter(
+      experience:
+        portfolio.experience.filter(
           (_, i) => i !== index
         ),
     });
@@ -58,21 +60,21 @@ const EducationForm = ({
       <div className="card-body p-4 p-md-5">
 
         <div className="d-flex align-items-center gap-2 mb-1">
-          <i className="bi bi-mortarboard text-primary"></i>
+          <i className="bi bi-briefcase text-primary"></i>
           <span
             className="text-primary text-uppercase fw-semibold small"
             style={{ letterSpacing: "0.05em" }}
           >
-            Step 4
+            Step 5
           </span>
         </div>
 
         <h3 className="fw-bold mb-1" style={{ letterSpacing: "-0.01em" }}>
-          Education
+          Experience
         </h3>
 
         <p className="text-muted mb-4">
-          Add your academic background.
+          Add roles that shaped your career.
         </p>
 
         <div
@@ -83,18 +85,17 @@ const EducationForm = ({
 
             <div className="col-md-6">
               <label className="form-label small fw-semibold text-muted">
-                University
+                Company
               </label>
 
               <input
                 className="form-control rounded-3"
-                placeholder="Harvard University"
-                value={education.university}
+                placeholder="Acme Inc."
+                value={experience.company}
                 onChange={(e) =>
-                  setEducation({
-                    ...education,
-                    university:
-                      e.target.value,
+                  setExperience({
+                    ...experience,
+                    company: e.target.value,
                   })
                 }
               />
@@ -102,17 +103,17 @@ const EducationForm = ({
 
             <div className="col-md-6">
               <label className="form-label small fw-semibold text-muted">
-                Degree
+                Role
               </label>
 
               <input
                 className="form-control rounded-3"
-                placeholder="B.Sc. Computer Science"
-                value={education.degree}
+                placeholder="Senior Frontend Engineer"
+                value={experience.role}
                 onChange={(e) =>
-                  setEducation({
-                    ...education,
-                    degree: e.target.value,
+                  setExperience({
+                    ...experience,
+                    role: e.target.value,
                   })
                 }
               />
@@ -120,23 +121,39 @@ const EducationForm = ({
 
           </div>
 
-          <div className="mb-3" style={{ maxWidth: "220px" }}>
+          <div className="mb-3" style={{ maxWidth: "320px" }}>
             <label className="form-label small fw-semibold text-muted">
-              Graduation Year
+              Duration
             </label>
 
             <input
-              type="number"
               className="form-control rounded-3"
-              placeholder="2024"
-              value={
-                education.graduationYear
-              }
+              placeholder="Jan 2022 - Present"
+              value={experience.duration}
               onChange={(e) =>
-                setEducation({
-                  ...education,
-                  graduationYear:
-                    Number(e.target.value),
+                setExperience({
+                  ...experience,
+                  duration: e.target.value,
+                })
+              }
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="form-label small fw-semibold text-muted">
+              Description
+            </label>
+
+            <textarea
+              rows={4}
+              className="form-control rounded-3"
+              placeholder="What did you work on?"
+              value={experience.description}
+              onChange={(e) =>
+                setExperience({
+                  ...experience,
+                  description:
+                    e.target.value,
                 })
               }
             />
@@ -144,15 +161,15 @@ const EducationForm = ({
 
           <button
             className="btn btn-primary rounded-3 px-4 fw-medium shadow-sm"
-            onClick={addEducation}
+            onClick={addExperience}
           >
             <i className="bi bi-plus-lg me-2"></i>
-            Add Education
+            Add Experience
           </button>
         </div>
 
         <div className="d-flex flex-column gap-3">
-          {portfolio.education.map(
+          {portfolio.experience.map(
             (item, index) => (
               <div
                 key={index}
@@ -163,33 +180,37 @@ const EducationForm = ({
                   style={{
                     width: "48px",
                     height: "48px",
-                    background: "#eef2ff",
+                    background: "#e7f9f1",
                   }}
                 >
                   <i
-                    className="bi bi-mortarboard-fill text-primary"
-                    style={{ fontSize: "1.25rem" }}
+                    className="bi bi-briefcase-fill"
+                    style={{ fontSize: "1.25rem", color: "#10b981" }}
                   ></i>
                 </div>
 
                 <div className="flex-grow-1 d-flex justify-content-between align-items-start">
 
                   <div>
-                    <h5 className="fw-bold mb-1">{item.degree}</h5>
+                    <h5 className="fw-bold mb-1">{item.role}</h5>
 
-                    <p className="mb-1 text-muted">
-                      {item.university}
+                    <p className="mb-1 text-muted fw-medium">
+                      {item.company}
                     </p>
 
-                    <span className="badge rounded-pill bg-light text-secondary border">
-                      {item.graduationYear}
+                    <span className="badge rounded-pill bg-light text-secondary border mb-2">
+                      {item.duration}
                     </span>
+
+                    <p className="mb-0 mt-2 text-muted">
+                      {item.description}
+                    </p>
                   </div>
 
                   <button
                     className="btn btn-sm btn-light text-danger rounded-3 flex-shrink-0"
                     onClick={() =>
-                      removeEducation(index)
+                      removeExperience(index)
                     }
                   >
                     <i className="bi bi-trash3"></i>
@@ -216,4 +237,4 @@ const EducationForm = ({
   );
 };
 
-export default EducationForm;
+export default ExperienceForm;
